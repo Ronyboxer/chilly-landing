@@ -1,0 +1,171 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--paper);
+  z-index: var(--z-hero);
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* No will-change: the element never transforms, only its texture changes. */
+  pointer-events: none;
+}
+
+.veil {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--nav-h) + var(--s-4)) var(--pad-inline) var(--s-12);
+  /* The stage owns pointer events; only the buttons opt back in. */
+  pointer-events: none;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+}
+
+.eyebrow {
+  font-size: var(--fs-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-50);
+  opacity: 0;
+  margin-bottom: var(--s-3);
+  will-change: transform, opacity;
+}
+
+.headline {
+  font-size: var(--fs-display);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  line-height: 0.92;
+  color: var(--ink);
+}
+
+.headlineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.headlineLine {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  will-change: transform;
+}
+
+.subtitle {
+  margin-top: var(--s-3);
+  font-size: var(--fs-lead);
+  letter-spacing: var(--track-snug);
+  color: var(--ink-70);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.actions {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  opacity: 0;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: var(--s-5);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-1);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-50);
+  pointer-events: none;
+}
+
+.hintRule {
+  width: var(--hairline);
+  height: 32px;
+  background: var(--ink-14);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--hairline);
+  background: var(--ink-08);
+}
+
+.progressBar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* ---- Reduced motion: a still hero, no sequence ------------------------- */
+.static .hint,
+.static .progress {
+  display: none;
+}
+
+.static .headlineLine {
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    /* One extra beat of headroom so the type never crowds the notch. */
+    min-height: 520px;
+  }
+
+  .overlay {
+    padding-bottom: var(--s-16);
+  }
+
+  .actions {
+    flex-direction: column;
+    align-self: stretch;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}

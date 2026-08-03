@@ -1,0 +1,18 @@
+.root {
+  display: block;
+}
+
+/* One mask per line. Clipping happens here so the moving element never needs
+   a filter, a shadow, or a layout property. */
+.mask {
+  display: block;
+  overflow: hidden;
+  /* Descenders would otherwise be shaved by the clip. */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line {
+  display: block;
+  will-change: transform;
+}

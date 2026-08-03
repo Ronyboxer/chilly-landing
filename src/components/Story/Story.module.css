@@ -1,0 +1,62 @@
+.section {
+  position: relative;
+  margin-top: calc(var(--pad-block) * -0.25);
+  /* Inline padding lives here so `--measure` stays a true measure — put it on
+     the inner element and the gutters eat the line length instead. */
+  padding: var(--pad-block) var(--pad-inline);
+  background: var(--paper);
+}
+
+.inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.label {
+  font-size: var(--fs-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-35);
+  margin-bottom: var(--s-6);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  line-height: 1.12;
+  margin-bottom: var(--s-5);
+}
+
+.body {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  letter-spacing: var(--track-snug);
+  color: var(--ink-50);
+}
+
+.body + .body {
+  margin-top: var(--s-4);
+}
+
+.coda {
+  margin-top: var(--s-6);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  letter-spacing: var(--track-snug);
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .inner {
+    text-align: left;
+  }
+
+  .body,
+  .coda {
+    font-size: var(--fs-body);
+    line-height: 1.65;
+  }
+}

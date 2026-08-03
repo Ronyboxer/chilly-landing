@@ -1,0 +1,107 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform var(--dur-enter) var(--ease),
+    background-color var(--dur-enter) var(--ease),
+    border-color var(--dur-enter) var(--ease);
+  border-bottom: var(--hairline) solid transparent;
+  will-change: transform;
+}
+
+.hidden {
+  transform: translate3d(0, -100%, 0);
+}
+
+/* Backdrop only past the hero — over the video the bar stays weightless. */
+.condensed {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: var(--ink-08);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad-inline);
+}
+
+.wordmark {
+  font-size: var(--fs-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+}
+
+.link {
+  position: relative;
+  display: block;
+  padding: var(--s-1) 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-50);
+  transition: color var(--dur-micro) var(--ease);
+}
+
+.linkLabel {
+  display: block;
+  transform: translateY(0);
+  transition: transform var(--dur-micro) var(--ease);
+}
+
+/* Hairline wipes in from the left. Same gesture as the button sweep. */
+.linkRule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--hairline);
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-micro) var(--ease);
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--ink);
+}
+
+.link:hover .linkLabel,
+.link:focus-visible .linkLabel {
+  transform: translateY(-1px);
+}
+
+.link:hover .linkRule,
+.link:focus-visible .linkRule {
+  transform: scaleX(1);
+}
+
+@media (max-width: 600px) {
+  .links {
+    gap: var(--s-3);
+  }
+
+  /* Three short labels still fit; a burger here would be theatre. */
+  .link {
+    font-size: 0.625rem;
+  }
+}

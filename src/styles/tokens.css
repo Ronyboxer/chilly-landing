@@ -1,0 +1,77 @@
+/**
+ * Design tokens — the single source of truth for easing, rhythm and type.
+ * Nothing in a component file should introduce a raw easing curve, a colour,
+ * or a spacing value that isn't derived from here.
+ */
+
+:root {
+  /* ---- Surface ------------------------------------------------------- */
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+
+  --ink-70: rgba(10, 10, 10, 0.7);
+  --ink-50: rgba(10, 10, 10, 0.5);
+  --ink-35: rgba(10, 10, 10, 0.35);
+  --ink-14: rgba(10, 10, 10, 0.14);
+  --ink-08: rgba(10, 10, 10, 0.08);
+  --ink-04: rgba(10, 10, 10, 0.04);
+
+  /* ---- Motion -------------------------------------------------------- */
+  /* One easing language. Expo-out, everywhere. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* The single sanctioned exception: pointer-tilt return on feature cards. */
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+  /* Ambient loops only (the floating can) — a one-way curve would tick. */
+  --ease-ambient: cubic-bezier(0.4, 0, 0.6, 1);
+
+  --dur-micro: 200ms;
+  --dur-enter: 600ms;
+  --dur-enter-slow: 800ms;
+
+  /* ---- Spacing — 8px scale ------------------------------------------- */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 40px;
+  --s-6: 48px;
+  --s-7: 56px;
+  --s-8: 64px;
+  --s-10: 80px;
+  --s-12: 96px;
+  --s-16: 128px;
+  --s-20: 160px;
+
+  /* Section rhythm scales with the viewport, not with fixed px. */
+  --pad-inline: clamp(20px, 5vw, 96px);
+  --pad-block: clamp(96px, 15vh, 192px);
+
+  --maxw: 1440px;
+  --measure: 700px;
+  --nav-h: 72px;
+  --hairline: 1px;
+
+  /* ---- Type ---------------------------------------------------------- */
+  --font-display: 'Inter', 'Inter Display', -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', Arial, sans-serif;
+
+  --fs-display: clamp(4rem, 14.5vw, 10rem);
+  --fs-h2: clamp(2.5rem, 6.5vw, 5rem);
+  --fs-h3: clamp(1.375rem, 2.2vw, 1.75rem);
+  --fs-lead: clamp(1.125rem, 2vw, 1.625rem);
+  --fs-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  --fs-label: 0.6875rem;
+
+  --track-tight: -0.03em;
+  --track-snug: -0.015em;
+  --track-label: 0.12em;
+
+  /* Two weights. Contrast comes from size. */
+  --w-regular: 400;
+  --w-medium: 500;
+
+  --z-hero: 1;
+  --z-nav: 60;
+  --z-loader: 90;
+  --z-cursor: 100;
+}

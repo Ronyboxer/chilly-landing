@@ -1,0 +1,166 @@
+.section {
+  position: relative;
+  /* Overlaps the section above so the page reads as one continuous surface
+     rather than a stack of blocks. */
+  margin-top: calc(var(--pad-block) * -0.35);
+  padding: var(--pad-block) 0;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad-inline);
+}
+
+.header {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-10);
+}
+
+.label {
+  font-size: var(--fs-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-35);
+}
+
+.heading {
+  font-size: var(--fs-h2);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  line-height: 1;
+}
+
+/* Off-axis: starts higher than the heading, and runs clean off the right edge
+   of the viewport — past the inner padding *and* past whatever gutter the
+   max-width leaves on a wide screen. Stopping at the container edge is what
+   makes an "asymmetric" layout still read as a grid. */
+.figure {
+  grid-column: 7 / 13;
+  grid-row: 1 / 3;
+  margin: 0;
+  margin-right: calc(-1 * (var(--pad-inline) + max(0px, (100vw - var(--maxw)) / 2)));
+  margin-top: calc(var(--s-16) * -1);
+  will-change: transform;
+}
+
+/* Compositor-only ambient float. No JS loop, nothing to schedule. */
+.float {
+  will-change: transform;
+  animation: float 7s var(--ease-ambient) infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none;
+  }
+}
+
+/* The frame crops the footage; the video inside it is deliberately oversized.
+   The source is a studio plate with a visible floor seam at ~95% of frame
+   height, which on a white page reads as a stray hairline rather than as
+   product photography. Overscanning ~10% cuts it and grounds the can on the
+   bottom edge of the frame. */
+.canFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 78vh, 900px);
+  overflow: hidden;
+}
+
+.can,
+.canPlaceholder {
+  position: absolute;
+  left: 0;
+  top: -3%;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.canPlaceholder {
+  background: var(--ink-04);
+}
+
+.specs {
+  grid-column: 2 / 7;
+  grid-row: 2;
+  margin: var(--s-12) 0 0;
+  border-top: var(--hairline) solid var(--ink-08);
+}
+
+.spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: var(--hairline) solid var(--ink-08);
+}
+
+.specLabel {
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-35);
+}
+
+.specValue {
+  margin: 0;
+  font-size: var(--fs-body);
+  letter-spacing: var(--track-snug);
+  color: var(--ink);
+  text-align: right;
+}
+
+/* ---- Narrow: re-composed, not squeezed -------------------------------- */
+@media (max-width: 900px) {
+  .section {
+    margin-top: calc(var(--pad-block) * -0.2);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+
+  .header {
+    padding-top: 0;
+  }
+
+  /* Full-bleed on both edges — the can becomes the width of the phone. */
+  .figure {
+    margin: 0 calc(var(--pad-inline) * -1);
+    order: -1;
+  }
+
+  .canFrame {
+    height: clamp(360px, 62vh, 560px);
+  }
+
+  .specs {
+    margin-top: 0;
+  }
+}

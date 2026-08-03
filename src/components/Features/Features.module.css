@@ -1,0 +1,143 @@
+.section {
+  position: relative;
+  padding: var(--pad-block) 0;
+  background: var(--paper);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad-inline);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  max-width: 720px;
+  margin-bottom: var(--s-12);
+}
+
+.label {
+  font-size: var(--fs-label);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-35);
+}
+
+.heading {
+  font-size: var(--fs-h2);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  line-height: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-2);
+}
+
+.cardWrap {
+  display: block;
+  /* The 3D context lives on the wrapper so the entrance transform and the
+     tilt transform never fight over the same property. */
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Index pinned to the top, copy sitting on the baseline — the whitespace
+     between them carries the composition instead of pooling under the text. */
+  justify-content: space-between;
+  min-height: clamp(320px, 34vw, 420px);
+  height: 100%;
+  padding: var(--s-5) var(--s-4) var(--s-5);
+  overflow: hidden;
+  border: var(--hairline) solid var(--ink-08);
+  background: var(--paper);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.resting {
+  transition: transform var(--dur-enter) var(--ease-spring);
+}
+
+/* Soft light following the pointer. The only radial in the build, and it
+   tops out at 5% ink — shading, not decoration. */
+.spot {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(10, 10, 10, 0.05),
+    rgba(10, 10, 10, 0) 68%
+  );
+  transition: opacity var(--dur-micro) var(--ease);
+}
+
+.card:hover .spot,
+.card:focus-within .spot {
+  opacity: 1;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--ink-14);
+}
+
+.index {
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  color: var(--ink-35);
+  font-variant-numeric: tabular-nums;
+}
+
+.copy {
+  margin-top: var(--s-10);
+}
+
+.title {
+  font-size: var(--fs-h3);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-snug);
+  line-height: 1.15;
+  margin-bottom: var(--s-2);
+}
+
+.body {
+  max-width: 34ch;
+  color: var(--ink-50);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--hairline);
+  }
+
+  .header {
+    margin-bottom: var(--s-8);
+  }
+
+  .card {
+    min-height: 0;
+    padding: var(--s-4) var(--s-3) var(--s-5);
+  }
+
+  .copy {
+    margin-top: var(--s-6);
+  }
+
+  .body {
+    max-width: none;
+  }
+}

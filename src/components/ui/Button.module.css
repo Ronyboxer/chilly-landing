@@ -1,0 +1,82 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--s-4);
+  overflow: hidden;
+  isolation: isolate;
+  border: var(--hairline) solid var(--ink);
+  border-radius: 999px;
+  font-size: var(--fs-body);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-snug);
+  white-space: nowrap;
+  transition: color var(--dur-micro) var(--ease);
+}
+
+/* The sweep. Scales on the Y axis only — no layout, no shadow. */
+.fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform var(--dur-micro) var(--ease);
+}
+
+.label {
+  display: block;
+  transform: translateY(0);
+  transition: transform var(--dur-micro) var(--ease);
+}
+
+.button:hover .label,
+.button:focus-visible .label {
+  transform: translateY(-1px);
+}
+
+.button:hover .fill,
+.button:focus-visible .fill {
+  transform: scaleY(1);
+}
+
+/* ---- Solid: ink field, sweeps to paper --------------------------------- */
+.solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.solid .fill {
+  background: var(--paper);
+}
+
+.solid:hover,
+.solid:focus-visible {
+  color: var(--ink);
+}
+
+/* ---- Ghost: hairline outline, sweeps to ink ---------------------------- */
+.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink-14);
+}
+
+.ghost .fill {
+  background: var(--ink);
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 100%;
+    padding: 0 var(--s-3);
+  }
+}

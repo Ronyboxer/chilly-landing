@@ -1,0 +1,35 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  /* Own stacking context so `difference` blends against the page, not the UI. */
+  mix-blend-mode: difference;
+}
+
+.dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition:
+    opacity var(--dur-micro) var(--ease),
+    scale var(--dur-micro) var(--ease);
+  scale: 1;
+}
+
+.visible {
+  opacity: 1;
+}
+
+/* Over anything interactive: grow into a soft target. */
+.active {
+  scale: 3.4;
+}
