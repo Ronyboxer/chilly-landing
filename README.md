@@ -1,6 +1,11 @@
 # Chilly
 
-Scroll-scrubbed product landing page. React + Vite + TypeScript, GSAP ScrollTrigger, Lenis, Framer Motion, CSS Modules.
+Scroll-scrubbed product landing page. The hero video is seeked frame by frame as
+you scroll, rather than played, so scroll position maps directly onto a frame.
+
+Live: https://chilly-landing-delta.vercel.app
+
+React, Vite, TypeScript, GSAP ScrollTrigger, Lenis, Framer Motion, CSS Modules.
 
 ```bash
 npm install
@@ -21,7 +26,7 @@ showing anything.
 
 **The 24fps master is motion-interpolated to 48fps.** Frame *count* is what
 buys smoothness at long pin lengths. With only 192 frames, stretching the pin
-means each frame holds for more scroll, which reads as stepping — px-per-frame
+means each frame holds for more scroll, which reads as stepping - px-per-frame
 alone can only trade pace against smoothness. Doubling the frames breaks the
 tie.
 
@@ -37,7 +42,7 @@ and the seek quantiser.
 
 MP4 is preferred at runtime; the WebM is a codec fallback only, and is
 deliberately 720p. On this footage all-intra VP9 encodes *larger* than H.264 at
-every quality level tested, so it is never the better download — and a file
+every quality level tested, so it is never the better download - and a file
 that essentially nobody fetches has no business being the largest asset in the
 deploy.
 
@@ -68,7 +73,7 @@ Invariants worth preserving:
   until `ScrollTrigger.isScrolling()` is false.
 - **`will-change` is transient**, applied to the pinned wrapper only while it's
   active.
-- Ambient loops (the floating can) are CSS keyframes, not JS animations — an
+- Ambient loops (the floating can) are CSS keyframes, not JS animations - an
   infinitely repeating Framer animation would keep a second frame loop alive.
 
 ## Accessibility
