@@ -5,6 +5,14 @@ you scroll, rather than played, so scroll position maps directly onto a frame.
 
 Live: https://chilly-landing-delta.vercel.app
 
+![The hero at rest](assets/screenshot.png)
+
+![The same hero partway through the scroll](assets/screenshot-scrolled.png)
+
+Two frames from the same scroll sequence. The video is not playing between
+them; both are a single seek to a given frame, driven entirely by scroll
+position.
+
 React, Vite, TypeScript, GSAP ScrollTrigger, Lenis, Framer Motion, CSS Modules.
 
 ```bash
